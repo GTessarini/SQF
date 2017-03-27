@@ -59,7 +59,7 @@ function sQfFactory(){
 		}	
 		return elemnt;
 	};
-	this.update = function(is, to, elemnt){
+	this.update = function(elemnt, is, to){
 		var cont = 0, length = elemnt.length;
 		while(cont < length){
 			elemnt[cont] = elemnt[cont] === is ? to : elemnt[cont];			
