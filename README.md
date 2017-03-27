@@ -16,6 +16,12 @@ sQ.insert(usersObject, 1, "John", "Doe", "email@email.com", "Country", "State", 
 sQ.insert(usersObject, 2, "Jonathan", "Doe", "email2@email.com", "Country", "State", "City", "His Address");
 ---> usersObject (Just inserted and populated ) {id: [1, 2], firstName: ["Joh", "Jonathan"], lastName: ["Doe", "Doe"], email: ["email@email.com", "email2@email.com"], country: ["Country", "Country"], state: ["State", "State"], city: ["City", "City"], address: ["His Address", "His Address"]};
 
+usersObject = sQ.alterAdd(usersOjbect, "middleName");
+---> usersObject {id: [1, 2], firstName: ["Joh", "Jonathan"], lastName: ["Doe", "Doe"], email: ["email@email.com", "email2@email.com"], country: ["Country", "Country"], state: ["State", "State"], city: ["City", "City"], address: ["His Address", "His Address"], middleName:[]};
+
+sQ.alterDrop(usersObject, "city");
+---> usersObject {id: [1, 2], firstName: ["Joh", "Jonathan"], lastName: ["Doe", "Doe"], email: ["email@email.com", "email2@email.com"], country: ["Country", "Country"], state: ["State", "State"], address: ["His Address", "His Address"], middleName:[]};
+
 */
 
 
