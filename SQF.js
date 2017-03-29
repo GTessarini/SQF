@@ -34,9 +34,13 @@ function sQfFactory(){
 		}
 		length = args.length;
 		if(elemnt instanceof Array){
-			while(cont<length){
-				elemnt[elemnt.length] = args[cont];			
-				cont++;	
+			if(!(args instanceof Array) && args !== arguments){
+				elemnt[elemnt.length] = args;			
+			}else{
+				while(cont<length){
+					elemnt[elemnt.length] = args[cont];			
+					cont++;	
+				}
 			}
 		}else{
 			var props = [];
@@ -145,9 +149,9 @@ function sQfFactory(){
 		return elemnt !== null ? true : false;
 	};
 	this.nullTo = function(elemnt, value){
-		if(elemnt === null){
+		if(!(elemnt instanceof Array) && elemnt === null){
 			elemnt = value;
-		}else{
+		}else if(elemnt instanceof Array){
 			var cont = 0, length = elemnt.length;
 			while(cont < length){
 				elemnt[cont] = elemnt[cont] === null ? value : elemnt[cont];	
@@ -224,7 +228,7 @@ function sQfFactory(){
 			var cont1, cont2, cont3 = 0, el1 = elemnt1, el2 = elemnt2;
 			ret = [];
 			var length = len1 + len2;
-			while(cont3 < 2){
+			while(cont3 < 3){
 				cont2 = 0;
 				while(cont2 < length){
 					cont1 = 0;
