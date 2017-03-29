@@ -127,7 +127,7 @@ When the condition is not valid inside he values, null is returned.
 
 ### _Null To_ specific value:
 #### sQ.nullTo(ARRAY_WITH_NULL_VALUES, CONVERSION_VALUE);
-#### _ARRAY_INDEX_WITH_NULL_VALUE = sQ.nullTo(ARRAY_INDEX_WITH_NULL_VALUE, CONVERSION_VALUE);
+#### ARRAY_INDEX_WITH_NULL_VALUE = sQ.nullTo(ARRAY_INDEX_WITH_NULL_VALUE, CONVERSION_VALUE);
 --> var myArray = [1, 2, null, null, 4, 5], myArrayTwo = [1, 2, null, null, 4, 5]
     1.  sQ.nullTo(myArray, 3);
     2.  myArrayTwo[2] = sQ.nullTo(myArray[2], 3);
@@ -150,7 +150,6 @@ When the condition is not valid inside he values, null is returned.
 #### sQ.repeat(FUNCTION, NUMBER_OF_TIMES);
 --> var myArray = [];
     1.  sQ.repeat(function(){sQ.insert(myArray, 1, 2, 3);}, 3);
-    
     2.  sQ.repeat(function(){alert("SQF IS AWESOME!");}, 3);
 ----> [1, 2, 3, 1, 2, 3, 1, 2, 3];
 
