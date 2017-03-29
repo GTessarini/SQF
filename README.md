@@ -141,12 +141,12 @@ When the condition is not valid inside he values, null is returned.
 #### var minValue = sQ.min(ARRAY_VALUES);
 #### var maxValue = sQ.max(ARRAY_VALUES);
 #### var sumValues = sQ.sum(ARRAY_VALUES);
-#### var prdctValues = sQ.muliply(ARRAY_VALUES);
+#### var prdctValues = sQ.multiply(ARRAY_VALUES);
 #### var variancValues = sQ.variance(ARRAY_VALUES);
 #### var deviationValues = sQ.devation(ARRAY_VALUES);
 
 
-**_-- REPEAT FUNCTION TO SIMPLIFY THE CODIND OF LOOPS --_**
+### _-- REPEAT FUNCTION TO SIMPLIFY THE CODING OF LOOPS --_
 #### sQ.repeat(FUNCTION, NUMBER_OF_TIMES);
 --> var myArray = [];
     1.  sQ.repeat(function(){sQ.insert(myArray, 1, 2, 3);}, 3);
@@ -155,4 +155,4 @@ When the condition is not valid inside he values, null is returned.
 
       ** TRY IT YOURSELF AND ENJOY **
 
-/*Gabriel Tessarini*/
+/**Gabriel Tessarini**/
