@@ -5,29 +5,30 @@ Light JavaScript library with great similarity with clauses and SQL commands tha
 
 Functions for more easily dealing with actions related to searching, modifying, creating and manipulating in various ways the big (or even small) Arrays and JSON objects in Javascript.
 
-DATA DEFINITION FUNCTIONS:
+_DATA DEFINITION FUNCTIONS:_
 
-**Create** JSON objects: 
+##**Create** JSON objects: 
 sQ.create("HOW", "MANY", "STRING", "ARGUMENTS", "TO", "DEFINE", "THE", "KEYS", "YOU" "WANT");
 --> var users = sQ.create("id", "firstName", "lastName", "email", "country", "state", "city", "faxNumber");
 ---> users => {id:[], firstName:[], lastName:[], email:[], country:[], state:[], city:[]};     
 
-**Alter** the JSON object **Adding** a new key to him:
+##**Alter** the JSON object **Adding** a new key to him:
 JSON_OBJECT = sQ.alterAdd(JSON_OBJECT, "NEW_KEY");
 --> users = sQ.alterAdd(users, "faxNumber");
 ---> users => {id:[], firstName:[], lastName:[], email:[], country:[], state:[], city:[], faxNumber:[]};     
 
-**Alter** the JSON object **Dropping** a specific owned key:
+##**Alter** the JSON object **Dropping** a specific owned key:
 sQ.alterDrop(JSON_OBJECT, "KEY_TO_BE_DROPPED");
 --> sQ.alterDrop(users, "faxNumber");
 ---> users => {id:[], firstName:[], lastName:[], email:[], country:[], state:[], city:[]};     
 
-DATA MANIPULATION FUNCTIONS:
+_DATA MANIPULATION FUNCTIONS:_
 
-**Insert** data into JSON objects/Arrays: 
+##**Insert** data into JSON objects/Arrays: 
 sQ.insert(JSON_OBJECT/ARRAY_VALUES, VALUES_IN_ORDER_OF_YOUR_OBJECT_KEYS);
 --> sQ.insert(users, 100, "John", "Doe", "e@email.com", "Brazil", "SP", "São Paulo");
 ----> users => {id: [100], firstName: ["Joh"], lastName: ["Doe"], email: ["e@email.com"], country: ["Brazil"], state: ["SP"], city: ["São Paulo"]};
+
 --> sQ.insert(users, 200, "Joan", "Doe", "e2@email.com", "Brazil", "RDj", "Rio de Janeiro");
 ----> users => {id: [100,200], firstName: ["John", "Joan"], lastName: ["Doe","Doe"], email: ["e@email.com", "e2@email.com"], country: ["Brazil", "Brazil"], state: ["SP","RJ"], city: ["São Paulo","Rio de Janeiro"]};
        
@@ -39,12 +40,12 @@ sQ.insert(JSON_OBJECT/ARRAY_VALUES, VALUES_IN_ORDER_OF_YOUR_OBJECT_KEYS);
        2.  myArray2 => [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "A", "B", "C"];
        3.  myArray3 => [[1, 2, 3, 4, 5, 6, 7, 8, 9, 0], ["A", "B", "C"];
  
-**Update** data present in array of values:
+##**Update** data present in array of values:
 sQ.update(ARRAY_VALUES, VALUE_TO_BE_UPDATED, CHANGE_TO_BE_DONE);
 --> sQ.update(users.lastName, "Joan" "Jannet");
 ----> users => {id: [100,200], firstName: ["John", "Jannet"], lastName: ["Doe","Doe"], email: ["e@email.com", "e2@email.com"], country: ["Brazil", "Brazil"], state: ["SP","RJ"], city: ["São Paulo","Rio de Janeiro"]}; 
 
-**Delete** data present in Array of values:
+##**Delete** data present in Array of values:
 ARRAY_VALUES = sQ.delet(ARRAY_VALUES, VALUE_TO_BE_DELETED);
 --> users.city = sQ.delet(users.city, "Rio de Janeiro");
 ----> users => {id: [100,200], firstName: ["John", "Jannet"], lastName: ["Doe","Doe"], email: ["e@email.com", "e2@email.com"], country: ["Brazil", "Brazil"], state: ["SP","RJ"], city: ["São Paulo"]}; 
@@ -53,9 +54,9 @@ ARRAY_VALUES = sQ.delet(ARRAY_VALUES, VALUE_TO_BE_DELETED);
 ----> var myArray = [1,2,3,4,5,6,7];
 
 
-DATA VALIDATION FUNCTIONS:
+_DATA VALIDATION FUNCTIONS:_
 
-**Where** condition is valid in a array of values, the data required or his position into the array is returned in the desired quantity when specified:
+##**Where** condition is valid in a array of values, the data required or his position into the array is returned in the desired quantity when specified:
 sQ.where(ARRAY_VALUES, "CONDITION_OPERATOR", CONDITION_VALUE, [IS_THE_RESULT_POSITION], [QUANTITY])
 When the condition is not valid inside he values, null is returned.
 --> var myArray = [1,2,3,4,5,6,7,8,9,10, true, "true", false, null, "Jonathan"];
@@ -72,7 +73,7 @@ When the condition is not valid inside he values, null is returned.
       5.   13;
       6.   14;
       
-**Difference** between two arrays (in length or in values):
+##**Difference** between two arrays (in length or in values):
 sQ.difference(ARRAY_VALUES_1, ARRAY_VALUES_2, [IS_IN_LENGTH]);
 --> var myArray = [1, 2, 3, 4, 5, "A", "B", "C"], myArray2 = [1,2, 3, "A", "B", "C", "D"];
     sQ.difference(myArray, myArray2);
@@ -81,7 +82,7 @@ sQ.difference(ARRAY_VALUES_1, ARRAY_VALUES_2, [IS_IN_LENGTH]);
    sQ.difference(myArray, myArray2, true);
 ----> 2;
 
-**Is Unique** value among all others inside array (without repetition):
+##**Is Unique** value among all others inside array (without repetition):
 sQ.isUnique(VALUE, ARRAY_VALUES);
 --> var myArray = [1, 2, 2, 3, 4, 5];
 
@@ -90,7 +91,7 @@ sQ.isUnique(VALUE, ARRAY_VALUES);
 ---->  1.   false
        2.   true
  
-**Is Null** value:
+##**Is Null** value:
 sQ.isNull(VALUE);
 --> var myArray = [1, 2, null, "null", 5];
     1.  sQ.isNull(myArray[1]);
@@ -99,7 +100,8 @@ sQ.isNull(VALUE);
 ---->  1.  false
        2.  true
        3.  false
-**Is Not Null** value:
+       
+##**Is Not Null** value:
 sQ.isNotNull(VALUE);
 --> var myArray = [1, 2, null, "null", 5];
     1.  sQ.isNotNull(myArray[1]);
@@ -108,23 +110,24 @@ sQ.isNotNull(VALUE);
 ---->  1.  true
        2.  false
        3.  true
-**Is Even** value:
+       
+##**Is Even** value:
 sQ.isEven(VALUE);
 -->  1.  sQ.isEven(3);
      2.  sQ.isEven(10);
 ----> 1.   false
       2.   true
       
-**Is Odd** value:
+##**Is Odd** value:
 sQ.isOdd(VALUE);
 -->  1.  sQ.isOdd(3);
      2.  sQ.isOdd(10);
 ----> 1.   true
       2.   false
       
-DATA CONVERSION FUNCTIONS:
+_DATA CONVERSION FUNCTIONS:_
 
-**Null To** specific value:
+##**Null To** specific value:
 sQ.nullTo(ARRAY_WITH_NULL_VALUES, CONVERSION_VALUE);
 ARRAY_WITH_NULL_VALUES = sQ.nullTo(SPECIFIC_NULL_VALUE, CONVERSION_VALUE);
 --> var myArray = [1, 2, null, null, 4, 5], myArray2 = [1, 2, null, null, 4, 5]
@@ -135,16 +138,16 @@ ARRAY_WITH_NULL_VALUES = sQ.nullTo(SPECIFIC_NULL_VALUE, CONVERSION_VALUE);
        2.  [1, 2, 3, null, 4, 5]
        3.  [1, 2, 3, 4, 4, 5]
  
-DATA MATHEMATICAL FUNCTIONS:
+_DATA MATHEMATICAL FUNCTIONS:_
 
-sQ.min(ARRAY_VALUES);
-sQ.max(ARRAY_VALUES);
-sQ.sum(ARRAY_VALUES);
-sQ.muliply(ARRAY_VALUES);
-sQ.variance(ARRAY_VALUES);
-sQ.devation(ARRAY_VALUES);
+var minValue = sQ.min(ARRAY_VALUES);
+var maxValue = sQ.max(ARRAY_VALUES);
+var sumValues = sQ.sum(ARRAY_VALUES);
+var prdctValues = sQ.muliply(ARRAY_VALUES);
+var variancValues = sQ.variance(ARRAY_VALUES);
+var deviationValues = sQ.devation(ARRAY_VALUES);
 
--- REPEAT FUNCTION TO SIMPLIFY THE CODIND OF LOOPS--
+_-- REPEAT FUNCTION TO SIMPLIFY THE CODIND OF LOOPS --_
 sQ.repeat(FUNCTION, NUMBER_OF_TIMES);
 --> var myArray = [];
     1.  sQ.repeat(function(){sQ.insert(myArray, 1, 2, 3);}, 3);
