@@ -30,16 +30,14 @@ sQ.insert(JSON_OBJECT/ARRAY_VALUES, VALUES_IN_ORDER_OF_YOUR_OBJECT_KEYS);
 ----> users => {id: [100], firstName: ["Joh"], lastName: ["Doe"], email: ["e@email.com"], country: ["Brazil"], state: ["SP"], city: ["São Paulo"]};
 --> sQ.insert(users, 200, "Joan", "Doe", "e2@email.com", "Brazil", "RDj", "Rio de Janeiro");
 ----> users => {id: [100,200], firstName: ["John", "Joan"], lastName: ["Doe","Doe"], email: ["e@email.com", "e2@email.com"], country: ["Brazil", "Brazil"], state: ["SP","RJ"], city: ["São Paulo","Rio de Janeiro"]};
-
-       AND      into Arrays, inserting how many lots of arguments you define, in order, and the best part: with just ONE line of code
        
 --> var myArray=[], myArray2=[], myArray3=[];
-    sQ.insert(myArray, 1,2,3,4,5,6,7,8,9,0,"A","B","C");
-    sQ.insert(myArray2, [1,2,3,4,5,6,7,8,9,0,"A","B","C"]);
-    sQ.insert(myArray3, [1,2,3,4,5,6,7,8,9,0],["A","B","C"]);
-----> myArray => [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "A", "B", "C"];
-      myArray2 => [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "A", "B", "C"];
-      myArray3 => [[1, 2, 3, 4, 5, 6, 7, 8, 9, 0], ["A", "B", "C"];
+    1.  sQ.insert(myArray, 1,2,3,4,5,6,7,8,9,0,"A","B","C");
+    2.  sQ.insert(myArray2, [1,2,3,4,5,6,7,8,9,0,"A","B","C"]);
+    3.  sQ.insert(myArray3, [1,2,3,4,5,6,7,8,9,0],["A","B","C"]);
+---->  1.  myArray => [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "A", "B", "C"];
+       2.  myArray2 => [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "A", "B", "C"];
+       3.  myArray3 => [[1, 2, 3, 4, 5, 6, 7, 8, 9, 0], ["A", "B", "C"];
  
 **Update** data present in array of values:
 sQ.update(ARRAY_VALUES, VALUE_TO_BE_UPDATED, CHANGE_TO_BE_DONE);
@@ -133,9 +131,9 @@ ARRAY_WITH_NULL_VALUES = sQ.nullTo(SPECIFIC_NULL_VALUE, CONVERSION_VALUE);
     1.  sQ.nullTo(myArray, 3);
     2.  myArray2[2] = sQ.nullTo(myArray[2], 3);
     3.  myArray2[3] = sQ.nullTo(myArray[3], 4);
--->  1.  [1, 2, 3, 3, 4, 5]
-     2.  [1, 2, 3, null, 4, 5]
-     3.  [1, 2, 3, 4, 4, 5]
+---->  1.  [1, 2, 3, 3, 4, 5]
+       2.  [1, 2, 3, null, 4, 5]
+       3.  [1, 2, 3, 4, 4, 5]
  
 DATA MATHEMATICAL FUNCTIONS:
 
@@ -153,6 +151,7 @@ sQ.repeat(FUNCTION, NUMBER_OF_TIMES);
     2.  sQ.repeat(function(){alert("SQF IS AWESOME!");}, 3);
     
 ----> [1, 2, 3, 1, 2, 3, 1, 2, 3]
+
       TRY IT YOURSELF AND ENJOY
 
 /*Gabriel Tessarini*/
