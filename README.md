@@ -150,6 +150,7 @@ When the condition is not valid inside he values, null is returned.
 #### sQ.repeat(FUNCTION, NUMBER_OF_TIMES);
 --> var myArray = [];
     1.  sQ.repeat(function(){sQ.insert(myArray, 1, 2, 3);}, 3);
+    
     2.  sQ.repeat(function(){alert("SQF IS AWESOME!");}, 3);
 ----> [1, 2, 3, 1, 2, 3, 1, 2, 3];
 
