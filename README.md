@@ -58,6 +58,7 @@ Functions for more easily dealing with actions related to searching, modifying, 
 ### _Where_ condition is valid in a array of values, the data required or his position into the array is returned in the desired quantity when specified:
 #### sQ.where(ARRAY_VALUES, "CONDITION_OPERATOR", CONDITION_VALUE, [IS_THE_RESULT_POSITION], [QUANTITY])
 When the condition is not valid inside he values, null is returned.
+** Acceptable comparisions: "==","===","!=","!==",">",<",">=","<=","isNull","isNotNull","isEven","isOdd","typeof","instanceof".**
 --> var myArray = [1,2,3,4,5,6,7,8,9,10, true, "true", false, null, "Jonathan"];
   1.  sQ.where(myArray, ">", 5);            //Values that are all greater than 5
   2.  sQ.where(myArray, ">", 5, true);      //Position (index) of all values greater than 5
@@ -65,6 +66,7 @@ When the condition is not valid inside he values, null is returned.
   4.  sQ.where(myArray, "!==", "true");     //Values that are all different in value and type from the String "true";
   5.  sQ.where(myArray, "===", null, true, 9999);  //Position (index) of all values that is equal null;
   6.  sQ.where(myArray, "===", "A", true);  //Position (index) of the value that is equal "Jonathan" (in value and type) 
+                   
 ---->  1.  [6, 7, 8, 9, 10];
        2.  [5, 6, 7, 8, 9];
        3.  [5, 6];
