@@ -112,6 +112,8 @@ function sQfFactory(){
 					break;
 				case "typeof": expr = typeof(elemnt[cont]) == compar ? true : false;
 					break;
+				case "instanceof": expr = elemnt[cont] instanceof compar ? true : false;
+					break;
 				case "isEven": expr = elemnt[cont] % 2 === 0 ? true : false; expr = expr == compar ? true : false;
 					break;
 				case "isOdd": expr = elemnt[cont] % 2 !== 0 ? true : false; expr = expr == compar ? true : false;
