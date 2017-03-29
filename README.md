@@ -128,13 +128,13 @@ When the condition is not valid inside he values, null is returned.
 ### _Null To_ specific value:
 #### sQ.nullTo(ARRAY_WITH_NULL_VALUES, CONVERSION_VALUE);
 #### ARRAY_INDEX_WITH_NULL_VALUE = sQ.nullTo(ARRAY_INDEX_WITH_NULL_VALUE, CONVERSION_VALUE);
---> var myArray = [1, 2, null, null, 4, 5], myArrayTwo = [1, 2, null, null, 4, 5]
+--> var myArray = [1, 2, null, null, 4, 5], myArrayTwo = [1, 2, null, null, 5, 6]
     1.  sQ.nullTo(myArray, 3);
-    2.  myArrayTwo[2] = sQ.nullTo(myArray[2], 3);
-    3.  myArrayTwo[3] = sQ.nullTo(myArray[3], 4);
----->  1.  [1, 2, 3, 3, 4, 5]
-       2.  [1, 2, 3, null, 4, 5]
-       3.  [1, 2, 3, 4, 4, 5]
+    2.  myArrayTwo[2] = sQ.nullTo(myArrayTwo[2], 3);
+    3.  myArrayTwo[3] = sQ.nullTo(myArrayTwo[3], 4);
+---->  1.  myArray => [1, 2, 3, 3, 4, 5]
+       2.  myArrayTwo => [1, 2, 3, null, 5, 6]
+       3.  myArrayTwo => [1, 2, 3, 4, 5, 6]
  
 ## _DATA MATHEMATICAL FUNCTIONS:_
 
