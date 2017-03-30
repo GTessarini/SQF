@@ -1,4 +1,5 @@
-# SQF
+![alt tag](https://github.com/GTessarini/SQF/blob/master/SQF_LOGO.png "SQF")
+
 Simplified Query Functions to JavaScript
 
 Light JavaScript library with great similarity with clauses and SQL commands that approach and simplify the human understanding turning lots of line of code in simple, literal and pratical words of command.
