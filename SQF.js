@@ -25,6 +25,12 @@ function sQfFactory(){
 		}			
 		return elemnt;
 	};
+	this.truncate=function(elemnt){
+		for(var prop in elemnt){
+			elemnt[prop]=[];
+		}
+		return elemnt;
+	};
 	this.insert=function(){
 		var elemnt = arguments[0], cont = 0, length = 0, args = arguments;
 		if(args.length > 2){
