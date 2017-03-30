@@ -21,7 +21,13 @@ Functions for more easily dealing with actions related to searching, modifying, 
 ### _Alter_ the JSON object _Dropping_ a specific owned key:
 #### sQ.alterDrop(JSON_OBJECT, "KEY_TO_BE_DROPPED");
 --> sQ.alterDrop(users, "faxNumber");
-----> users => {id:[], firstName:[], lastName:[], email:[], country:[], state:[], city:[]};     
+----> users => {id:[], firstName:[], lastName:[], email:[], country:[], state:[], city:[]};
+
+### _Truncate_ the JSON object, removing all his data but keeping the structure and definitions:
+#### sQ.truncate(JSON_OBJECT);
+--> var dogs ={id:[1,2,3,4,5...9999], name:["A","B","C"..."ZZZZ"], blabla:[001,002...999], ...};
+    sQ.truncate(dogs)
+---->  dogs => {id:[], name:[], blabla:[], ...};
 
 ## _DATA MANIPULATION FUNCTIONS:_
 
