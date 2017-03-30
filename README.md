@@ -1,4 +1,4 @@
-![alt tag](https://github.com/GTessarini/SQF/blob/master/SQF_LOGO.png "SQF")
+![alt tag](https://github.com/GTessarini/SQF/blob/master/SQF_LOGO.jpg "SQF")
 
 Simplified Query Functions to JavaScript
 
