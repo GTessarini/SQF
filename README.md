@@ -8,8 +8,8 @@ Functions for more easily dealing with actions related to searching, modifying, 
 
 ## _DATA DEFINITION FUNCTIONS:_
 
-### _Create_ JSON objects: 
- - #### sQ.create("HOW", "MANY", "STRING", "ARGUMENTS", "TO", "DEFINE", "THE", "KEYS", "YOU" "WANT");
+ - ### _Create_ JSON objects: 
+#### sQ.create("HOW", "MANY", "STRING", "ARGUMENTS", "TO", "DEFINE", "THE", "KEYS", "YOU" "WANT");
 ```javascript
  var users = sQ.create("id", "firstName", "lastName", "email", "country", "state", "city", "faxNumber");
  // users: {id:[], firstName:[], lastName:[], email:[], country:[], state:[], city:[]};   
