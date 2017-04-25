@@ -1,6 +1,6 @@
 /*//  !	SQF - Simplified Query Functions - V1 03/2017 ! \\*/
 /*//  !	Gabriel Tessarini !	\\*/
-function sQfFactory(){
+function sqfFactory(){
 	this.create=function(){
 		var ret = "{", args = arguments, length = args.length, cont = 0;
 		while(cont < length){
@@ -297,4 +297,4 @@ function sQfFactory(){
 		return dp;
 	};
 }
-var sQ = new sQfFactory();
+var sq = new sqfFactory();
