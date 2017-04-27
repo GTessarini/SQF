@@ -2,9 +2,9 @@
 
 Simplified Query Functions to JavaScript
 
-Lightweight JavaScript library (ultracompatible with many famous others) with great similarity with clauses and SQL commands that approach and simplify the human understanding turning lots of line of code in simple, literal and pratical words of command.
+Lightweight JavaScript library (ultracompatible with browser support, old and new versions, and with many famous others libs) with great similarity with clauses and SQL commands that approach and simplify the human understanding turning lots of line of code in simple, literal and pratical words of command.
 
-Functions for more easily dealing with actions related to searching, modifying, creating and manipulating in various ways the big (or even small) Arrays and JSON objects in Javascript.
+Functions for more easily dealing with actions related to searching, modifying, creating and manipulating in various ways the big (or even small) Arrays and JSON objects in Javascript dodging the browser version compatibility issues.
 
 ## _DATA DEFINITION FUNCTIONS:_
 
