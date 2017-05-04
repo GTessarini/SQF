@@ -33,7 +33,7 @@ sq.alterDrop(users, "faxNumber");
 #### sq.truncate(JSON_OBJECT);
 ```javascript
 var dogs = {id:[1,2,3,4,5...9999], name:["A","B","C"..."ZZZZ"], blabla:[001,002...999], ...};
-    sq.truncate(dogs)
+sq.truncate(dogs)
 // dogs: {id:[], name:[], blabla:[], ...};
 ```
 
@@ -71,8 +71,8 @@ sq.update(users.lastName, "Joan" "Jannet");
 users.city = sq.delet(users.city, "Rio de Janeiro");
 // users: {id: [100,200], firstName: ["John", "Jannet"], lastName: ["Doe","Doe"], email: ["e@email.com", "e2@email.com"], country: ["Brazil", "Brazil"], state: ["SP","RJ"], city: ["São Paulo"]}; 
 var myArray = [1,2,3,4,5,6,7,"Ops"];
-    myArray = sq.delet(myArray, "Ops");
-var myArray = [1,2,3,4,5,6,7];
+myArray = sq.delet(myArray, "Ops");
+//myArray = [1,2,3,4,5,6,7];
 ````
 
 ## _DATA VALIDATION FUNCTIONS:_
