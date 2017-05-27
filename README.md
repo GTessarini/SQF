@@ -61,7 +61,7 @@ sq.insert(users, 200, "Joan", "Doe", "e2@email.com", "Brazil", "RDj", "Rio de Ja
 #### sq.update(ARRAY_VALUES, VALUE_TO_BE_UPDATED, CHANGE_TO_BE_DONE);
 ```javascript
 // users: {id: [100,200], firstName: ["John", "Joan"], lastName: ["Doe","Doe"], email: ["e@email.com", "e2@email.com"], country: ["Brazil", "Brazil"], state: ["SP","RJ"], city: ["São Paulo","Rio de Janeiro"]};
-sq.update(users.lastName, "Joan" "Jannet");
+sq.update(users.lastName, "Joan", "Jannet");
 // users: {id: [100,200], firstName: ["John", "Jannet"], lastName: ["Doe","Doe"], email: ["e@email.com", "e2@email.com"], country: ["Brazil", "Brazil"], state: ["SP","RJ"], city: ["São Paulo","Rio de Janeiro"]}; 
 ````
 
