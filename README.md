@@ -45,7 +45,7 @@ sq.truncate(dogs)
 sq.insert(users, 100, "John", "Doe", "e@email.com", "Brazil", "SP", "São Paulo");
 // users: {id: [100], firstName: ["Joh"], lastName: ["Doe"], email: ["e@email.com"], country: ["Brazil"], state: ["SP"], city: ["São Paulo"]};
 
-sq.insert(users, 200, "Joan", "Doe", "e2@email.com", "Brazil", "RDj", "Rio de Janeiro");
+sq.insert(users, 200, "Joan", "Doe", "e2@email.com", "Brazil", "RJ", "Rio de Janeiro");
 // users: {id: [100,200], firstName: ["John", "Joan"], lastName: ["Doe","Doe"], email: ["e@email.com", "e2@email.com"], country: ["Brazil", "Brazil"], state: ["SP","RJ"], city: ["São Paulo","Rio de Janeiro"]};
 ```   
 ```javascript
