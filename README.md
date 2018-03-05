@@ -88,8 +88,8 @@ var myArray = [1,2,3,4,5,6,7,8,9,10, true, "true", false, null, "Jonathan"];
   2.  sq.where(myArray, ">", 5, true);      //Position (index) of all values greater than 5
   3.  sq.where(myArray, ">", 5, true, 2);   //Position (index) of just 2 values greater than 5
   4.  sq.where(myArray, "!==", "true");     //Values that are all different in value and type from the String "true";
-  5.  sq.where(myArray, "===", null, true, 9999);  //Position (index) of all values that is equal null;
-  6.  sq.where(myArray, "===", "A", true);  //Position (index) of the value that is equal "Jonathan" (in value and type) 
+  5.  sq.where(myArray, "===", null, true, 9999);  //Position (index) of no later than 9999 values that are equal to null;
+  6.  sq.where(myArray, "===", "Jonathan", true);  //Position (index) of the value that is equal to "Jonathan" (in value and type) 
                    
 /*     1.  [6, 7, 8, 9, 10];
        2.  [5, 6, 7, 8, 9];
