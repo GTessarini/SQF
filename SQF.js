@@ -1,300 +1,320 @@
-/*//  !	SQF - Simplified Query Functions - V1 03/2017 ! \\*/
+/*//  !	SQF - Simplified Query Functions - V1.1 05/2018 ! \\*/
 /*//  !	Gabriel Tessarini !	\\*/
-function sqfFactory(){
-	this.create=function(){
-		var ret = "{", args = arguments, length = args.length, cont = 0;
-		while(cont < length){
-			ret+= cont < length-1 ? '"' + args[cont] + '"' + ":[]," : '"' + args[cont] + '"' + ":[]";
-			cont++;
-		}
-		ret+="}";
-		ret = JSON.parse(ret);
-		return ret;	
-	};
-	this.alterAdd=function(elemnt, add){
-		var elJ = JSON.stringify(elemnt);
-		elJ = elJ.substring(0, elJ.length-1);
-		elJ = elJ + ', ' + '"'+ add + '"' + ':[]}';
-		elemnt = JSON.parse(elJ);
-		return elemnt;
-	};
-	this.alterDrop=function(elemnt, drop){
-		for(var prop1 in elemnt){
-			if(prop1 == drop)
-				delete elemnt[prop1];		
-		}			
-		return elemnt;
-	};
-	this.truncate=function(elemnt){
-		for(var prop in elemnt){
-			elemnt[prop]=[];
-		}
-		return elemnt;
-	};
-	this.insert=function(){
-		var elemnt = arguments[0], cont = 0, length = 0, args = arguments;
-		if(args.length > 2){
-			cont++;
-		}else{		
-			args = args[1];		
-		}
-		length = args.length;
-		if(elemnt instanceof Array){
-			if(!(args instanceof Array) && args !== arguments){
-				elemnt[elemnt.length] = args;			
-			}else{
-				while(cont<length){
-					elemnt[elemnt.length] = args[cont];			
-					cont++;	
-				}
-			}
-		}else{
-			var props = [];
-			var cont2 = cont === 1 ? 0 : cont;
-			for(var prop1 in elemnt){
-				props[props.length] = prop1;	
-			}		
-			while(cont < length){
-				for(var prop2 in elemnt){			
-					if(prop2 == props[cont2]){
-						if(!(elemnt[prop2] instanceof Array)){
-							elemnt[prop2] = [elemnt[prop2]];
-						}
-						elemnt[prop2][elemnt[prop2].length] = args[cont];
-					}
-				}			
-				cont++;
-				cont2++;
-			}		
-		}	
-		return elemnt;
-	};
-	this.update = function(elemnt, is, to){
-		var cont = 0, length = elemnt.length;
-		while(cont < length){
-			elemnt[cont] = elemnt[cont] === is ? to : elemnt[cont];			
-			cont++;
-		}
-		return elemnt;
-	};
-	this.delet=function(elemnt, del){
-		var ret = [], cont = 0, length = elemnt.length;
-		while(cont < length){
-			if(elemnt[cont] !== del) ret[ret.length] = elemnt[cont];
-			cont++;
-		}
-		if(ret.length)
-			elemnt = ret;	
-		return elemnt;
-	};
-	this.where = function(elemnt, oper, compar, posi, qtd){
-		var ret = null;
-		if(oper.trim() == "") return ret;
-		var length = elemnt.length;
-		qtd = typeof(qtd) === "undefined" || qtd == false ? length : typeof(qtd) !== "undefined" && (qtd == true || qtd >= 0) ? qtd : null;
-		if(qtd === null) return ret;
-		var	retArr = [], expr = false, cont = 0, situ = true;
-		while(situ && (cont < length && qtd >= length || retArr.length < qtd && cont < length)){
-			switch(oper){
-				case "==": expr = elemnt[cont] == compar ? true: false;
-					break;
-				case "===": expr = elemnt[cont] === compar ? true: false;
-					break;
-				case "!=": expr = elemnt[cont] != compar ? true: false;
-					break;
-				case "!==": expr = elemnt[cont] !== compar ? true: false;
-					break;
-				case ">": expr = elemnt[cont] > compar ? true: false;
-					break;
-				case "<": expr = elemnt[cont] < compar ? true: false;
-					break;
-				case ">=": expr = elemnt[cont] >= compar ? true: false;
-					break;
-				case "<=": expr = elemnt[cont] <= compar ? true: false;
-					break;
-				case "isNull": expr = elemnt[cont] === null ? true: false; expr = expr == compar ? true: false;
-					break;
-				case "isNotNull": expr = elemnt[cont] !== null ? true : expr; expr = expr == compar ? true : false;
-					break;
-				case "typeof": expr = typeof(elemnt[cont]) == compar ? true : false;
-					break;
-				case "instanceof": expr = elemnt[cont] instanceof compar ? true : false;
-					break;
-				case "isEven": expr = elemnt[cont] % 2 === 0 ? true : false; expr = expr == compar ? true : false;
-					break;
-				case "isOdd": expr = elemnt[cont] % 2 !== 0 ? true : false; expr = expr == compar ? true : false;
-					break;
-				default: expr = false; situ = false;
-			}
-			if(expr === true){			
-				ret = typeof(posi) !== "undefined" && posi == true ? cont : elemnt[cont];
-				if(qtd === length)	
-					retArr[retArr.length] = ret;				
-				else if(qtd == 1)
-					break;
-				else if(retArr.length < qtd)
-					retArr[retArr.length] = ret;
-			}
-			cont++;			
-		}		
-		if(retArr.length){
-			ret = retArr;
-			if(retArr.length === 1) ret = retArr[0];
-		}
-		return ret;
-	};
-	this.repeat=function(func, times){
-		var cont = 0, context = this ,args = arguments;
-		while(cont < times){
-			func.apply(context, args);
-			cont++;		
-		}
-	};
-	this.isNull = function(elemnt){
-		return elemnt === null ? true : false;
-	};
-	this.isNotNull = function(elemnt){
-		return elemnt !== null ? true : false;
-	};
-	this.nullTo = function(elemnt, value){
-		if(!(elemnt instanceof Array) && elemnt === null){
-			elemnt = value;
-		}else if(elemnt instanceof Array){
-			var cont = 0, length = elemnt.length;
-			while(cont < length){
-				elemnt[cont] = elemnt[cont] === null ? value : elemnt[cont];	
-				cont++;	
-			}
-		}
-		return elemnt;
-	};
-	this.isUnique = function(value, elemnt){
-		var length = elemnt.length, cont = 0;
-		var ret = 0;
-		while(cont < length && ret <= 1){
-			ret += elemnt[cont] === value ? 1 : 0;
-			cont++;
-		}
-		return ret === 1 ? true : false;
-	};
-	this.isEven=function(elemnt){
-		return elemnt % 2 === 0 ? true : false;
-	};
-	this.isOdd=function(elemnt){
-		return elemnt % 2 !== 0 ? true : false;
-	};
-	this.sum=function(elemnt){
-		var ret = 0, cont = 0, length = elemnt.length;
-		while(cont < length){
-			ret = ret + (elemnt[cont]*1);
-			cont++;		
-		}
-		return ret;
-	};
-	this.multiply=function(elemnt){
-		var ret = 1, cont = 0, length = elemnt.length;
-		while(cont < length){
-			ret = ret * (elemnt[cont]*1);
-			cont++;		
-		}
-		return ret;
-	};
-	this.average=function(elemnt){
-		var av = 0, cont = 0, length = elemnt.length;
-		while(cont < length){
-			av += (elemnt[cont]*1);
-			cont++;
-		}
-		av = av/length;
-		return av;
-	};
-	this.min=function(elemnt){
-		var min = elemnt[0]*1;
-		var cont = 0, length = elemnt.length;
-		while(cont < length){
-			if(elemnt[cont]*1 < min) min = elemnt[cont]*1;
-			cont++;
-		}
-		return min;
-	};
-	this.max=function(elemnt){
-		var max = elemnt[0]*1;
-		var cont = 0, length = elemnt.length;
-		while(cont < length){
-			if(elemnt[cont]*1 > max) max = elemnt[cont]*1;
-			cont++;
-		}
-		return max;
-	};
-	this.difference = function(elemnt1, elemnt2, len){
-		var ret = 0, len1 = elemnt1.length, len2 = elemnt2.length;
-		if(typeof(len) !== "undefined" && len == true){
-			ret = (len1 - len2);
-			ret = ret < 0 ? (len1 - len2)*-1 : ret;
-			return ret;
-		}else{
-			var cont1, cont2, cont3 = 0, el1 = elemnt1, el2 = elemnt2;
-			ret = [];
-			var length = len1 + len2;
-			while(cont3 < 3){
-				cont2 = 0;
-				while(cont2 < length){
-					cont1 = 0;
-					while(cont1 < length){
-						if(el1[cont1] === el2[cont2]){el1.splice(cont1, 1); el2.splice(cont2, 1);}
-						cont1++;			
-					}
-					cont2++;
-				}
-				cont3++;
-			}
-			if(el1.length){
-				cont1 = 0;
-				while(cont1 < el1.length){
-					ret[ret.length] = el1[cont1];
-					cont1++;
-				}			
-			}
-			if(el2.length){
-				cont1 = 0;
-				while(cont1 < el2.length){
-					ret[ret.length] = el2[cont1];
-					cont1++;
-				}
-			}
-		}
-		return ret;
-	};
-	this.variance=function(elemnt){
-		var varic = 0, media = 0, cont = 0, length = elemnt.length;
-		while(cont < length){
-			media += (elemnt[cont]*1);
-			cont++;
-		}
-		media = media/length;
-		cont = 0;    
-		while(cont < length){
-			varic += (elemnt[cont]*1 - media)*(elemnt[cont]*1 - media);
-			cont++;
-		}
-		varic = varic/(length-1);
-		return varic;
-	};
-	this.deviation=function(elemnt){
-		var dp = 0, avg = 0, cont = 0, length = elemnt.length;
-		while(cont < length){
-			avg += (elemnt[cont]*1);
-			cont++;
-		}
-		avg = avg/length;
-		cont = 0;    
-		while(cont < length){
-			dp += (elemnt[cont]*1 - avg)*(elemnt[cont]*1 - avg);
-			cont++;
-		}
-		dp = dp/(length-1);
-		dp = Math.sqrt(dp);
-		return dp;
-	};
-}
-var sq = new sqfFactory();
+function sqf(){}
+sqf.prototype.create = function(){
+    var ret = "{", args = arguments, length = args.length, count = 0;
+    while(count < length){
+        ret += count < length-1 ? '"' + args[count] + '"' + ":[]," : '"' + args[count] + '"' + ":[]";
+        count++;
+    }
+    ret += "}";
+    ret = JSON.parse(ret);
+    return ret;	
+};
+sqf.prototype.alterAdd = function(element, add){
+    var elJ = JSON.stringify(element);
+    elJ = elJ.substring(0, elJ.length-1);
+    elJ = elJ + ', ' + '"'+ add + '"' + ':[]}';
+    element = JSON.parse(elJ);
+    return element;
+};
+sqf.prototype.alterDrop = function(element, drop){
+    for(var prop1 in element){
+        if(prop1 == drop)
+            delete element[prop1];		
+    }			
+    return element;
+};
+sqf.prototype.truncate = function(element){
+    for(var prop in element){
+        element[prop]=[];
+    }
+    return element;
+};
+sqf.prototype.insert = function(){
+    var element = arguments[0], count = 0, length = 0, args = arguments;
+    if(args.length > 2){
+        count++;
+    }else{		
+        args = args[1];		
+    }
+    length = args.length;
+    if(element instanceof Array){
+        if(!(args instanceof Array) && args !== arguments){
+            element[element.length] = args;			
+        }else{
+            while(count<length){
+                element[element.length] = args[count];			
+                count++;	
+            }
+        }
+    }else{
+        var props = [];
+        var count2 = count === 1 ? 0 : count;
+        for(var prop1 in element){
+            props[props.length] = prop1;	
+        }		
+        while(count < length){
+            for(var prop2 in element){			
+                if(prop2 == props[count2]){
+                    if(!(element[prop2] instanceof Array)){
+                        element[prop2] = [element[prop2]];
+                    }
+                    element[prop2][element[prop2].length] = args[count];
+                }
+            }			
+            count++;
+            count2++;
+        }		
+    }	
+    return element;
+};
+sqf.prototype.update = function(element, is, to){
+    var count = 0, length = element.length;
+    while(count < length){
+        element[count] = element[count] === is ? to : element[count];			
+        count++;
+    }
+    return element;
+};
+sqf.prototype.delete = function(element, del){
+    var delet = [], count = 0, length = element.length;
+    while(count < length){
+        if(element[count] !== del) delet[delet.length] = element[count];
+        count++;
+    }
+    if(delet.length)
+        element = delet;	
+    return element;
+};
+sqf.prototype.where = function(element, oper, compar, posi, qty){
+    var where = null;
+    if(oper.trim() == "") return where;
+    var length = element.length;
+    qty = typeof(qty) === "undefined" || qty == false ? length : typeof(qty) !== "undefined" && (qty == true || qty >= 0) ? qty : null;
+    if(qty === null) return where;
+    var	whereArr = [], expr = false, count = 0, situ = true;
+    while(situ && (count < length && qty >= length || whereArr.length < qty && count < length)){
+        switch(oper){
+            case "==": 
+                expr = element[count] == compar ? true: false;
+                break;
+            case "===":
+                expr = element[count] === compar ? true: false;
+                break;
+            case "!=":
+                expr = element[count] != compar ? true: false;
+                break;
+            case "!==":
+                expr = element[count] !== compar ? true: false;
+                break;
+            case ">":
+                expr = element[count] > compar ? true: false;
+                break;
+            case "<":
+                expr = element[count] < compar ? true: false;
+                break;
+            case ">=":
+                expr = element[count] >= compar ? true: false;
+                break;
+            case "<=":
+                expr = element[count] <= compar ? true: false;
+                break;
+            case "isNull":
+                expr = element[count] === null ? true: false; 
+                expr = expr == compar ? true: false;
+                break;
+            case "isNotNull":
+                expr = element[count] !== null ? true : expr; 
+                expr = expr == compar ? true : false;
+                break;
+            case "typeof":
+                expr = typeof(element[count]) == compar ? true : false;
+                break;
+            case "instanceof":
+                expr = element[count] instanceof compar ? true : false;
+                break;
+            case "isEven":
+                expr = element[count] % 2 === 0 ? true : false; 
+                expr = expr == compar ? true : false;
+                break;
+            case "isOdd":
+                expr = element[count] % 2 !== 0 ? true : false;
+                expr = expr == compar ? true : false;
+                break;
+            default:
+                expr = false;
+                situ = false;
+        }
+        if(expr === true){			
+            where = typeof(posi) !== "undefined" && posi == true ? count : element[count];
+            if(qty === length)	
+                whereArr[whereArr.length] = where;				
+            else if(qty == 1)
+                break;
+            else if(whereArr.length < qty)
+                whereArr[whereArr.length] = where;
+        }
+        count++;			
+    }		
+    if(whereArr.length){
+        where = whereArr;
+        if(whereArr.length === 1) where = whereArr[0];
+    }
+    return where;
+};
+sqf.prototype.repeat = function(func, times){
+    var count = 0, context = this, args = arguments;
+    while(count < times){
+        func.apply(context, args);
+        count++;		
+    }
+};
+sqf.prototype.isNull = function(element){
+    return element === null ? true : false;
+};
+sqf.prototype.isNotNull = function(element){
+    return element !== null ? true : false;
+};
+sqf.prototype.nullTo = function(element, value){
+    if(!(element instanceof Array) && element === null){
+        element = value;
+    }else if(element instanceof Array){
+        var count = 0, length = element.length;
+        while(count < length){
+            element[count] = element[count] === null ? value : element[count];	
+            count++;	
+        }
+    }
+    return element;
+};
+sqf.prototype.isUnique = function(value, element){
+    var length = element.length, count = 0;
+    var uniq = 0;
+    while(count < length && uniq <= 1){
+        uniq += element[count] === value ? 1 : 0;
+        count++;
+    }
+    return uniq === 1 ? true : false;
+};
+sqf.prototype.isEven = function(element){
+    return element % 2 === 0 ? true : false;
+};
+sqf.prototype.isOdd = function(element){
+    return element % 2 !== 0 ? true : false;
+};
+sqf.prototype.sum = function(element){
+    var sum = 0, count = 0, length = element.length;
+    while(count < length){
+        sum = sum + (element[count]*1);
+        count++;		
+    }
+    return sum;
+};
+sqf.prototype.multiply = function(element){
+    var mult = 1, count = 0, length = element.length;
+    while(count < length){
+        mult = mult * (element[count]*1);
+        count++;		
+    }
+    return mult;
+};
+sqf.prototype.average = function(element){
+    var av = 0, count = 0, length = element.length;
+    while(count < length){
+        av += (element[count]*1);
+        count++;
+    }
+    av = av/length;
+    return av;
+};
+sqf.prototype.min = function(element){
+    var min = element[0]*1;
+    var count = 0, length = element.length;
+    while(count < length){
+        if(element[count]*1 < min) min = element[count]*1;
+        count++;
+    }
+    return min;
+};
+sqf.prototype.max = function(element){
+    var max = element[0]*1;
+    var count = 0, length = element.length;
+    while(count < length){
+        if(element[count]*1 > max) max = element[count]*1;
+        count++;
+    }
+    return max;
+};
+sqf.prototype.difference = function(element1, element2, len){
+    var diff = 0, len1 = element1.length, len2 = element2.length;
+    if(typeof(len) !== "undefined" && len == true){
+        diff = (len1 - len2);
+        diff = diff < 0 ? (len1 - len2)*-1 : diff;
+        return diff;
+    }else{
+        var count1, count2, count3 = 0, el1 = element1, el2 = element2;
+        diff = [];
+        var length = len1 + len2;
+        while(count3 < 3){
+            count2 = 0;
+            while(count2 < length){
+                count1 = 0;
+                while(count1 < length){
+                    if(el1[count1] === el2[count2]){el1.splice(count1, 1); 
+                    el2.splice(count2, 1);}
+                    count1++;			
+                }
+                count2++;
+            }
+            count3++;
+        }
+        if(el1.length){
+            count1 = 0;
+            while(count1 < el1.length){
+                diff[diff.length] = el1[count1];
+                count1++;
+            }			
+        }
+        if(el2.length){
+            count1 = 0;
+            while(count1 < el2.length){
+                diff[diff.length] = el2[count1];
+                count1++;
+            }
+        }
+    }
+    return diff;
+};
+sqf.prototype.variance = function(element){
+    var varic = 0, media = 0, count = 0, length = element.length;
+    while(count < length){
+        media += (element[count]*1);
+        count++;
+    }
+    media = media/length;
+    count = 0;    
+    while(count < length){
+        varic += (element[count]*1 - media)*(element[count]*1 - media);
+        count++;
+    }
+    varic = varic/(length-1);
+    return varic;
+};
+sqf.prototype.deviation = function(element){
+    var dp = 0, avg = 0, count = 0, length = element.length;
+    while(count < length){
+        avg += (element[count]*1);
+        count++;
+    }
+    avg = avg/length;
+    count = 0;    
+    while(count < length){
+        dp += (element[count]*1 - avg)*(element[count]*1 - avg);
+        count++;
+    }
+    dp = dp/(length-1);
+    dp = Math.sqrt(dp);
+    return dp;
+};
+var sq = new sqf();
