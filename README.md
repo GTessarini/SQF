@@ -66,12 +66,12 @@ sq.update(users.lastName, "Joan", "Jannet");
 ````
 
 - ### _Delete_ data present in Array of values:
-#### ARRAY_VALUES = sq.delet(ARRAY_VALUES, VALUE_TO_BE_DELETED);
+#### ARRAY_VALUES = sq.delete(ARRAY_VALUES, VALUE_TO_BE_DELETED);
 ```javascript
-users.city = sq.delet(users.city, "Rio de Janeiro");
+users.city = sq.delete(users.city, "Rio de Janeiro");
 // users: {id: [100,200], firstName: ["John", "Jannet"], lastName: ["Doe","Doe"], email: ["e@email.com", "e2@email.com"], country: ["Brazil", "Brazil"], state: ["SP","RJ"], city: ["São Paulo"]}; 
 var myArray = [1,2,3,4,5,6,7,"Ops"];
-myArray = sq.delet(myArray, "Ops");
+myArray = sq.delete(myArray, "Ops");
 //myArray = [1,2,3,4,5,6,7];
 ````
 
