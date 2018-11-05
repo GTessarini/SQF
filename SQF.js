@@ -1,4 +1,4 @@
-/*//  !	SQF - Simplified Query Functions - V1.1 05/2018 ! \\*/
+/*//  !	SQF - Simplified Query Functions - Version 1.1.1 05/2018 ! \\*/
 /*//  !	Gabriel Tessarini !	\\*/
 function sqf(){}
 sqf.prototype.create = function(){
@@ -78,13 +78,12 @@ sqf.prototype.update = function(element, is, to){
     return element;
 };
 sqf.prototype.delete = function(element, del){
-    var delet = [], count = 0, length = element.length;
+    var noDeleted = [], count = 0, length = element.length;
     while(count < length){
-        if(element[count] !== del) delet[delet.length] = element[count];
+        if(element[count] !== del) noDeleted[noDeleted.length] = element[count];
         count++;
     }
-    if(delet.length)
-        element = delet;	
+    element = noDeleted;	
     return element;
 };
 sqf.prototype.where = function(element, oper, compar, posi, qty){
